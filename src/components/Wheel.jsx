@@ -19,6 +19,8 @@ export default class Wheel extends Component {
                             name = {type.name}
                             image = {type.image}
                             onTypeSelect = {type=>this.props.onTypeSelect(type)}
+                            firstType = {this.props.firstType}
+                            secondType = {this.props.secondType}
                         />
                     ))}
             </ul>

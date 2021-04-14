@@ -9,8 +9,12 @@ export default class DisplayTable extends Component {
     }
 
     render() {
+        let message = "None";
+        if (this.props.firstType && this.props.secondType) message = this.props.firstType.name + " and " + this.props.secondType.name;
+        else if (this.props.firstType) message = this.props.firstType.name;
+        else if (this.props.secondType) message = this.props.secondType.name;
         return (
-            <div>{this.props.firstType ? this.props.firstType.name : "None"} selected</div>
+            <div>{message} selected</div>
         );
     }
 }

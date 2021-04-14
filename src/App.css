@@ -6,11 +6,16 @@
   list-style: none;
   display: inline-block;
   margin: 0 15px;
+  padding: 5px;
   cursor: pointer;
 }
 
 .TypeElement:hover {
   opacity: 0.9;
+}
+
+.TypeElement.selected {
+  border: solid 1px red;
 }
 
 .TypeElement img {

@@ -6,8 +6,8 @@ export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstType: "",
-            secondType: ""
+            firstType: null,
+            secondType: null
         };
     }
 
@@ -31,19 +31,28 @@ export default class Main extends Component {
     }
 
     onTypeSelect(type) {
-        let newType = this.typelist()[type];
-        if (this.state.firstType.name !== type) {
-            this.setState({firstType: newType});
+        let firstType = this.state.firstType;
+        let secondType = this.state.secondType;
+        if (firstType && secondType) {
+            if (type !== firstType.name && type !== secondType.name) return;
+            type === firstType.name ? this.setState({firstType: null}) : this.setState({secondType: null});
         }
         else {
-            this.setState({firstType: ""});
+            let newType = this.typelist()[type];
+            if (!firstType && !secondType) this.setState({firstType: newType});
+            else if (firstType) {
+                type === firstType.name ? this.setState({firstType: null}) : this.setState({secondType: newType});
+            }
+            else {
+                type === secondType.name ? this.setState({secondType: null}) : this.setState({firstType: newType});
+            }
         }
     }
 
     render() {
         return (
             <main>
-                <Wheel typelist={this.typelist} onTypeSelect={type=>this.onTypeSelect(type)} />
+                <Wheel typelist={this.typelist} onTypeSelect={type=>this.onTypeSelect(type)} firstType={this.state.firstType} secondType={this.state.secondType} />
                 <DisplayTable firstType={this.state.firstType} secondType={this.state.secondType} />
             </main>
         );
