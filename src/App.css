@@ -5,17 +5,22 @@
 .TypeElement {
   list-style: none;
   display: inline-block;
-  margin-right: 20px;
+  margin: 0 15px;
   cursor: pointer;
 }
 
 .TypeElement:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .TypeElement img {
   width: 50px;
   height: auto;
+  transition: all 0.5 ease;
+}
+
+.TypeElement:hover img {
+  transform: scale(1.25);
 }
 
 .TypeElement p {

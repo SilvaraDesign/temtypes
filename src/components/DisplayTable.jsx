@@ -3,11 +3,14 @@ import React, { Component } from "react";
 export default class DisplayTable extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            //
+        }
     }
 
     render() {
         return (
-            <div>Table goes here</div>
+            <div>{this.props.firstType ? this.props.firstType.name : "None"} selected</div>
         );
     }
 }
