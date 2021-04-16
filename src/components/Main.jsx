@@ -107,6 +107,7 @@ export default class Main extends Component {
     render() {
         return (
             <main>
+                <h1>Welcome to Temtypes!</h1>
                 <Wheel typelist={this.state.typelist} onTypeSelect={type=>this.onTypeSelect(type)} firstType={this.state.firstType} secondType={this.state.secondType} />
                 <DisplayTable firstType={this.state.firstType} secondType={this.state.secondType} selectedWeaknesses={this.state.selectedWeaknesses} typelist={this.state.typelist} typenames={this.state.typenames}/>
             </main>
