@@ -5,9 +5,10 @@
 .TypeElement {
   list-style: none;
   display: inline-block;
-  margin: 0 15px;
-  padding: 5px;
+  margin: 0 5px;
+  padding: 15px;
   cursor: pointer;
+  border-radius: 15%;
 }
 
 .TypeElement:hover {
@@ -15,7 +16,7 @@
 }
 
 .TypeElement.selected {
-  border: solid 1px red;
+  background-color: #eec200;
 }
 
 .TypeElement img {

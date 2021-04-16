@@ -12,7 +12,7 @@ export default class Wheel extends Component {
     render() {
         return (
             <ul>
-                {this.props.typelist()
+                {this.props.typelist
                     .map((type, index) => (
                         <TypeElement 
                             key = {index}
