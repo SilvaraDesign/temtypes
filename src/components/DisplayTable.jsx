@@ -48,7 +48,7 @@ export default class DisplayTable extends Component {
         if (!this.props.firstType && !this.props.secondType) {
             return (
                 <section className="DisplayTable">
-                    <p>No type selected</p>
+                    <p>Select Temtem types...</p>
                 </section>
             )
         }
@@ -65,35 +65,71 @@ export default class DisplayTable extends Component {
             }
             return (
                 <section className="DisplayTable">
-                    <div>
-                        <h2>{message}</h2>
-                        <ul>
-                            <li>4x from {weaknesses.superEffective.map((type, index) => (
-                                <TableType 
-                                    key = {index}
-                                    type = {type}
-                                />
-                            ))}</li>
-                            <li>2x from {weaknesses.effective.map((type, index) => (
-                                <TableType 
-                                    key = {index}
-                                    type = {type}
-                                />
-                            ))}</li>
-                            <li>0.5x from {weaknesses.resistant.map((type, index) => (
-                                <TableType 
-                                    key = {index}
-                                    type = {type}
-                                />
-                            ))}</li>
-                            <li>0.25x from {weaknesses.superResistant.map((type, index) => (
-                                <TableType 
-                                    key = {index}
-                                    type = {type}
-                                />
-                            ))}</li>
-                        </ul>
-                    </div>
+                    <h2>{message}</h2>
+                    <table>
+                        <tbody>
+                        <tr>
+                                <th scope="row">
+                                    <span>4x from</span>
+                                </th>
+                                <td>
+                                    <ul>
+                                        {weaknesses.superEffective.map((type, index) => (
+                                            <TableType 
+                                                key = {index}
+                                                type = {type}
+                                            />
+                                        ))}
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <span>2x from</span>
+                                </th>
+                                <td>
+                                    <ul>
+                                        {weaknesses.effective.map((type, index) => (
+                                            <TableType 
+                                                key = {index}
+                                                type = {type}
+                                            />
+                                        ))}
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <span>0.5x from</span>
+                                </th>
+                                <td>
+                                    <ul>
+                                        {weaknesses.resistant.map((type, index) => (
+                                            <TableType 
+                                                key = {index}
+                                                type = {type}
+                                            />
+                                        ))}
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <span>0.25x from</span>
+                                </th>
+                                <td>
+                                    <ul>
+                                        {weaknesses.superResistant.map((type, index) => (
+                                            <TableType 
+                                                key = {index}
+                                                type = {type}
+                                            />
+                                        ))}
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             );
         }

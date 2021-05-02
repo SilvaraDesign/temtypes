@@ -25,26 +25,23 @@ export default class Main extends Component {
     }
 
     getTypelist() {
-        let types = [
-            {name: "Neutral", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/b/b3/Neutral.png"},
-            {name: "Toxic", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/9/96/Toxic.png"},
-            {name: "Mental", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/b/bf/Mental.png"},
-            {name: "Crystal", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/3/31/Crystal.png"},
-            {name: "Fire", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/3/30/Fire.png"},
-            {name: "Melee", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/8/8f/Melee.png"},
-            {name: "Electric", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/2/2f/Electric.png"},
-            {name: "Nature", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/a/a7/Nature.png"},
-            {name: "Wind", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/b/bf/Wind.png"},
-            {name: "Water", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/9/9d/Water.png"},
-            {name: "Digital", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/1/1b/Digital.png"},
-            {name: "Earth", image: "https://static.wikia.nocookie.net/temtem_gamepedia_en/images/1/1e/Earth.png"},
-        ];
-        let names = [];
-        types.forEach(type => {
-            types[type.name] = type;
-            names.push(type.name);
-        });
-        this.setState({typelist: types, typenames: names});
+        Services.getTypes().then(
+            (response)=>{
+              return response.json();
+        })
+        .then(
+            (responseJson)=>{
+                let types = [];
+                let names = [];
+                responseJson.forEach(type => {
+                    type.icon = 'https://temtem-api.mael.tech' + type.icon;
+                    responseJson[type.name] = type;
+                    names.push(type.name);
+                });
+                types = this.reorderTypes(responseJson);
+                this.setState({typelist: types, typenames: names});
+            }
+        );
     }
 
     getWeaknesses() {
@@ -55,7 +52,8 @@ export default class Main extends Component {
         .then(
             (responseJson)=>{
                 this.setState({ weaknesses: responseJson });
-        });
+            }
+        );
     }
 
     onTypeSelect(type) {
@@ -102,6 +100,18 @@ export default class Main extends Component {
             });
         }
         this.setState({selectedWeaknesses: {type1: weaknesses1, type2: weaknesses2}});
+    }
+
+    reorderTypes(typeArray) {
+        let typeOrder = {'Neutral': 0, 'Toxic': 1, 'Mental': 2, 'Crystal': 3, 'Fire': 4, 'Melee': 5, 'Electric': 6, 'Nature': 7, 'Wind': 8, 'Water': 9, 'Digital': 10, 'Earth': 11};
+        let ret = [];
+        let index;
+        typeArray.forEach(type => {
+            index = typeOrder[type.name];
+            ret[index] = type;
+            ret[type.name] = type;
+        });
+        return ret;
     }
 
     render() {

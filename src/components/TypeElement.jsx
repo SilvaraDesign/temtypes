@@ -19,7 +19,7 @@ export default class TypeElement extends Component {
         else if (this.props.secondType && (this.props.secondType.name === this.props.name)) isSelected = true;
         return (
             <li className={(isSelected ? "selected " : "") + "TypeElement"} onClick={() => this.handleTypeSelect()}>
-                <img src={this.props.image} alt={this.props.name + " icon"}/>
+                <img src={this.props.icon} alt={this.props.name + " icon"}/>
                 <p>{this.props.name}</p>
             </li>
         );
